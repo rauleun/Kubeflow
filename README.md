@@ -101,13 +101,16 @@ SERVICE_HOSTNAME=$(kubectl get inferenceservice -n ai-dept ${MODEL_NAME} -o json
 curl -v -H "Host: ${SERVICE_HOSTNAME}" http://$CLUSTER_IP/v1/models/$MODEL_NAME:predict -d $INPUT_PATH > ./ocr_det_output.json
 ~~~
 model name은 생성된 inference service의 이름, 
+
 input path는 inference를 하고자 하는 input data의 경로, 
+
 cluster ip는 cluster 내에서 작동하고 있는 ingress-gateway node-selector의 ip address, 
+
 service hostname은 생성된 inference service에 부여된 url을 입력해줍니다.
 
 명령어들을 shell script로 작성하여 curl로 요청을 보낸 뒤, json file로 저장해줍니다.
 
-저장한 json file을 다시 png로 변환합니다.
+저장한 json file 다시 png로 변환합니다.
 
 ~~~
 $ python kfserving_output.py
