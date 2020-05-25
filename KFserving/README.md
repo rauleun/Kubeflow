@@ -32,6 +32,11 @@ $ kubectl apply -f kfserving-pvc-ehs -n ai-dept.yaml
 $ kubectl apply -f kfserving-pod-ehs -n ai-dept.yaml
 ~~~
 
+![kubectl get pv](./image/kubectl_get_pv.GIF)
+
+![kubectl get pvc](./image/kubectl_get_pvc.GIF)
+
+
 Pod가 정상적으로 생성되었는지 kubectl 명령어를 통해서 확인합니다.
 
 ~~~
@@ -81,6 +86,9 @@ Model 전송이 완료되면, model을 담고 있는 path를 참조하는 infere
 ~~~
 $ kubectl apply -f kfserving-infer-svc.yaml -n ai-dept
 ~~~
+
+![kubectl get inferenceservice](./image/kubectl_get_inferenceservice.GIF)
+
 
 Inference service의 deployment는 canary 등을 적용할 수 있습니다. 
 (upgrade 하고 싶은 model의 경로를 spec: canary에 두고, probability를 할당합니다.)
