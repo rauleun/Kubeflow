@@ -116,10 +116,11 @@ curl -v -H "Host: ${SERVICE_HOSTNAME}" http://$CLUSTER_IP/v1/models/$MODEL_NAME:
 $ python kfserving_output.py
 ~~~
 
-input image (text)
+**input image (text)**
+
 ![input image](./image/ocr_det.png)
 
-output image (detected heatmap)
+**output image (detected heatmap)**
 
 ![output image](./image/ocr_det_output.png)
 
