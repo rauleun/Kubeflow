@@ -38,6 +38,9 @@ Pod가 정상적으로 생성되었는지 kubectl 명령어를 통해서 확인�
 $ kubectl get pods -n ai-dept -o wide
 ~~~
 
+![kubectl describe pod](./image/kubectl_describe_pod.GIF)
+
+
 Pod 내부에 container-ehs라는 이름으로 생성해둔 nginx 기반의 container 내부로 접속해줍니다.
 
 ~~~
