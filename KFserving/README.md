@@ -120,5 +120,6 @@ input image (text)
 ![input image](./image/ocr_det.png)
 
 output image (detected heatmap)
+
 ![output image](./image/ocr_det_output.png)
 
