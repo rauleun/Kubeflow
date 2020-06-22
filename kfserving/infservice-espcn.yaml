@@ -1,0 +1,10 @@
+apiVersion: "serving.kubeflow.org/v1alpha2"
+kind: "InferenceService"
+metadata:
+  name: "model-espcn"
+spec:
+  default:
+    predictor:
+      tensorflow:
+        storageUri: "pvc://pvc-model/models/model-espcn/"
+
