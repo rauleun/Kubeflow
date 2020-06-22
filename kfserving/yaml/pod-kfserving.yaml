@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-pipeline
+  namespace: "kubeflow"
+spec:
+  volumes:
+  - name: data-sr-pipeline
+    persistentVolumeClaim:
+      claimName: pvc-pipeline
+  containers:
+    - name: container-ehs
+      image: rauleun/ai-kubeflow:ver6
+      resources:
+        requests:
+          memory: "3Gi"
+          cpu: "0.4"
+        limits:
+          memory: "3Gi"
+          cpu: "0.5"
+      command: ["/bin/sh", "-c", "while : ; do sleep 3; done"]
+      volumeMounts:
+        - mountPath: /hd
+          name: data-sr-pipeline
