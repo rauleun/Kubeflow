@@ -11,7 +11,7 @@ Subpixel convolution layer을 통한 image super-resolution을 수행하는 mode
 
 ### 1. model upload
 
-model을 담기 위한 persistent volume claim을 생성하고, describe 기능을 통해 pvc 생성 정보를 확인해줍니다..
+model을 담기 위한 persistent volume claim을 생성하고, describe 기능을 통해 pvc 생성 정보를 확인해줍니다.
 
 모든 namespace는 **kubeflow**로 통일하겠습니다.
 
