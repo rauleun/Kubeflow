@@ -55,13 +55,13 @@ model 위치가 잘 입력되었다면 inference service를 생성해줍니다.
 
 이 때, inference service가 생성되는 namespace의 label에는 
 
-**serving.kubeflow.org = true**
+`**serving.kubeflow.org = true**`
 
-**serving.kubeflow.org/inferenceservice = enabled **
+`**serving.kubeflow.org/inferenceservice = enabled**`
  
 등이 필수적으로 포함되어야 하며, 아래와 같은 control plane label은 반드시 제거된 상태여야만 합니다.
 
-**control-plane = kubeflow **
+**control-plane = kubeflow**
 
 namespace의 label은 아래의 명령어로 확인할 수 있습니다.
 
