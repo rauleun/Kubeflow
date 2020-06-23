@@ -37,20 +37,52 @@ metric이 잘 도출되는 것까지 확인하면, experiment를 만들어 hyper
 최적화하고자 하는 hyperparameter에 따라, 최적화하는 방식에 따라 katib experiment yaml file을 작성합니다.
 
 `objective`
+```
 
-성능 평가를 하는 metric을 정의합니다. metric의 이름과 최적화하는 방향, 목표 수치 등을 입력합니다.
+$  objective:
+$    type: maximize
+$    goal: 50
+$    objectiveMetricName: PSNR-validation
+$  metricsCollectorSpec:
+$    collector:
+$      kind: StdOut
+
+```
+
+성능 평가를 하는 metric을 정의합니다. metric의 이름과 최적화하는 방향, 목표 수치 등을 입력합니다. 이 때 metric의 이름은 training 과정에서 출력하는 metric의 이름과 정확히 일치해야 합니다.
 
 metric을 수집하는 metric collector은 StdOut collector을 사용합니다.
 
 (tensorflow summary collector 같은 경우에는, 현재 버전 기준으로 Tensorflow 1에 대해서만 지원합니다. 본 코드는 Tensorflow2로 작성되었기 때문에 사용하지 않았습니다.)
 
 `algorithm`
+```
 
+$  algorithm:
+$    algorithmName: bayesianoptimization
+
+```
 optimization algorithm을 정의합니다. 
 
 algorithm의 종류로는 random, gridsearch, bayesian optimization 등을 지원합니다.
 
 `parameters`
+```
+
+$  parameters:
+$    - name: --learning_rate
+$      parameterType: double
+$      feasibleSpace:
+$        min: "0.001"
+$        max: "0.003"
+$        step: "0.0001"
+$    - name: --batch_size
+$      parameterType: int
+$      feasibleSpace:
+$        min: "16"
+$        max: "40"
+        
+```
 
 최적화를 통해 결정할 parameter을 정의합니다.
 
