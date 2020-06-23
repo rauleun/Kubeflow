@@ -4,6 +4,8 @@ katib은 hyperparameter tuning을 지원해주는 kubeflow의 module입니다.
 
 autoML 기반의 hyperparameter optimization이 가능합니다.
 
+![katib](https://github.com/rauleun/Kubeflow/blob/master/katib/README-images/katib.png)
+
 ---
 
 ### 1. model traininig
@@ -25,6 +27,8 @@ $ python /home/super_resolution-module_SR_VESPCN/tf2/srcs/trainers/espcn/espcn_t
 ```
 
 gpu에 연결되면 아래처럼 cuda library가 잘 실행되며 training이 시작됩니다.
+
+![gpu-ok](https://github.com/rauleun/Kubeflow/blob/master/katib/README-images/gpu-ok.GIF)
 
 training과 validation 과정을 거쳐 model을 저장하고, 각 training step 마다 PSNR 결과를 보여줍니다.
 
@@ -99,13 +103,21 @@ trial template에는 trial에 따라 model을 학습해주는 container을 정�
 
 또한 command 란에 저장 경로 등의 argument를 추가하여 학습을 진행할 수 있습니다.
 
+---
+
 ### 3. graph 
 
 experiment가 종료되면, kubeflow UI를 통해서 graph 형태의 experiment result를 확인할 수 있습니다.
 
 graph에서는 suggestion에서 결정한 parameter values와 그에 대한 metric result를 보여줍니다.
 
+![katib-graph](https://github.com/rauleun/Kubeflow/blob/master/katib/README-images/katib-graph.png?raw=true)
+
 최고의 성능을 보여준 hyperparameter을 결정할 수 있습니다.
+
+각 trial에 대한 결과는 katib-table을 통해서도 확인할 수 있습니다.
+
+![katib-table](https://github.com/rauleun/Kubeflow/blob/master/katib/README-images/katib-table.GIF)
 
 
 
