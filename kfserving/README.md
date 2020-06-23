@@ -73,12 +73,16 @@ namespace의 label은 아래의 명령어로 확인할 수 있습니다.
 $ kubectl describe namespace kubeflow
 ~~~
 
+![describe_namespace](https://github.com/rauleun/Kubeflow/blob/master/kfserving/data/README_images/describe-namespace.GIF)
+
 inference service를 생성한 후 traffic이 잘 전송되고 있다면, URL이 생성되고 READY 란에 `TRUE`가 표기됩니다.
 
 ~~~
 $ kubectl apply -f infservice-espcn -n kubeflow
 $ kubectl get inferenceservice -A
 ~~~
+
+![get_infservice](https://github.com/rauleun/Kubeflow/blob/master/kfserving/data/README_images/get-infservice.GIF)
 
 ---
 
