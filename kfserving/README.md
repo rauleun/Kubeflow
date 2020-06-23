@@ -4,7 +4,10 @@ kubeflow 기능 중 inference service 생성을 도와주는 KF serving 기능�
 
 Subpixel convolution layer을 통한 image super-resolution을 수행하는 model 중의 하나인 **ESPCN model**을 pre-trained 해두었습니다.
 
+![kubeflow](https://www.kubeflow.org/docs/components/serving/kfserving.png)
+
 ---
+
 
 ### 1. model upload
 
@@ -48,17 +51,17 @@ model upload가 완료되면, model의 저장 위치를 infservice-espcn.yaml의
 
 cluster의 pvc가 아닌 google cloud 등에 model이 저장되어 있다면 "gs:" 의 형태로 입력합니다. 
 
-잘 기입되었다면 inference service를 생성해줍니다.
+model 위치가 잘 입력되었다면 inference service를 생성해줍니다.
 
 이 때, inference service가 생성되는 namespace의 label에는 
 
-** serving.kubeflow.org = true **
+**serving.kubeflow.org = true**
 
-** serving.kubeflow.org/inferenceservice = enabled **
+**serving.kubeflow.org/inferenceservice = enabled **
  
 등이 필수적으로 포함되어야 하며, 아래와 같은 control plane label은 반드시 제거된 상태여야만 합니다.
 
-** control-plane = kubeflow **
+**control-plane = kubeflow **
 
 namespace의 label은 아래의 명령어로 확인할 수 있습니다.
 
@@ -69,8 +72,11 @@ $ kubectl describe namespace kubeflow
 생성된 inference service에 traffic이 잘 전송되고 있다면, URL이 생성되고 READY 란에 TRUE가 표기됩니다.
 
 ~~~
+$ kubectl apply -f infservice-espcn -n kubeflow
 $ kubectl get inferenceservice -A
 ~~~
+
+
 
 
 
