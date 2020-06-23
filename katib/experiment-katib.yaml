@@ -1,0 +1,72 @@
+apiVersion: "kubeflow.org/v1alpha3"
+kind: Experiment
+metadata:
+  namespace: ai-dept
+  labels:
+    controller-tools.k8s.io: "1.0"
+  name: katib-sr-ex2
+spec:
+  objective:
+    type: maximize
+    goal: 50
+    objectiveMetricName: PSNR-validation
+  metricsCollectorSpec:
+    collector:
+      kind: StdOut
+  algorithm:
+    algorithmName: bayesianoptimization
+  parallelTrialCount: 2
+  maxTrialCount: 20
+  maxFailedTrialCount: 3
+  parameters:
+    - name: --learning_rate
+      parameterType: double
+      feasibleSpace:
+        min: "0.001"
+        max: "0.003"
+        step: "0.0001"
+    - name: --batch_size
+      parameterType: int
+      feasibleSpace:
+        min: "16"
+        max: "40"
+  trialTemplate:
+    goTemplate:
+        rawTemplate: |-
+          apiVersion: batch/v1
+          kind: Job
+          metadata:
+            name: {{.Trial}}
+            namespace: {{.NameSpace}}
+          spec:
+            template:
+              spec:
+                volumes:
+                - name: sr-data
+                  persistentVolumeClaim:
+                    claimName: pvc-sr-data
+                containers:
+                - name: {{.Trial}}
+                  image: rauleun/ai-kubeflow:ver7
+                  volumeMounts:
+                  - name: sr-data
+                    mountPath: /hd  
+                  resources:
+                    requests:
+                      cpu: 0.7
+                      memory: 10Gi
+                      nvidia.com/gpu: 1
+                    limits:
+                      cpu: 0.8
+                      memory: 20Gi
+                      nvidia.com/gpu: 1
+                  command:
+                  - "python"
+                  - "/home/super_resolution-module_SR_VESPCN/tf2/srcs/trainers/espcn/espcn_trainer_gradient_tape.py"
+                  - "--exp_name=youtube_small_data_scale2_00_epoch10_gradient_tape_lr1e-4_hyunsung"
+                  {{- with .HyperParameters}}
+                  {{- range .}}
+                  - "{{.Name}}={{.Value}}"
+                  {{- end}}
+                  {{- end}}
+                restartPolicy: Never             
