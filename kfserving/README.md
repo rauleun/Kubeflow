@@ -11,7 +11,7 @@ Subpixel convolution layer을 통한 image super-resolution을 수행하는 mode
 
 ### 1. model upload
 
-model을 담기 위한 persistent volume claim을 생성하고, describe 기능을 통해 pvc 생성 정보를 확인해줍니다..
+model을 담기 위한 persistent volume claim을 생성하고, describe 기능을 통해 pvc 생성 정보를 확인해줍니다.
 
 모든 namespace는 **kubeflow**로 통일하겠습니다.
 
@@ -20,6 +20,8 @@ $ kubectl apply -f pvc-espcn.yaml -n kubeflow
 
 $ kubectl describe pvc pvc-model -n kubeflow
 ~~~
+
+![describe_pvc](https://github.com/rauleun/Kubeflow/blob/master/kfserving/data/README_images/describe-pvc.GIF)
 
 생성된 pvc를 물고 있는 pod를 생성해줍니다. 
 
@@ -71,12 +73,16 @@ namespace의 label은 아래의 명령어로 확인할 수 있습니다.
 $ kubectl describe namespace kubeflow
 ~~~
 
+![describe_namespace](https://github.com/rauleun/Kubeflow/blob/master/kfserving/data/README_images/describe-namespace.GIF)
+
 inference service를 생성한 후 traffic이 잘 전송되고 있다면, URL이 생성되고 READY 란에 `TRUE`가 표기됩니다.
 
 ~~~
 $ kubectl apply -f infservice-espcn -n kubeflow
 $ kubectl get inferenceservice -A
 ~~~
+
+![get_infservice](https://github.com/rauleun/Kubeflow/blob/master/kfserving/data/README_images/get-infservice.GIF)
 
 ---
 
