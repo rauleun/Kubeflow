@@ -21,6 +21,8 @@ $ kubectl apply -f pvc-espcn.yaml -n kubeflow
 $ kubectl describe pvc pvc-model -n kubeflow
 ~~~
 
+![describe-pvc](/data/README_images/describe-pvc.GIF)
+
 생성된 pvc를 물고 있는 pod를 생성해줍니다. 
 
 (pod를 생성하는 yaml 파일에 생성한 pvc 정보를 입력하고, mount 경로를 입력해줍니다.)
