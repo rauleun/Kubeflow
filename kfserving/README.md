@@ -6,17 +6,13 @@ Subpixel convolution layer을 통한 image super-resolution을 수행하는 mode
 
 ### model upload
 
-model을 담기 위한 persistent volume claim을 생성해줍니다.
+model을 담기 위한 persistent volume claim을 생성하고, describe 기능을 통해 pvc 생성 정보를 확인해줍니다..
 
 모든 namespace는 **kubeflow**로 통일하겠습니다.
 
 ~~~
 $ kubectl apply -f pvc-espcn.yaml -n kubeflow
-~~~
 
-persistent volume claim이 잘 생성되었는지 확인해줍니다.
-
-~~~
 $ kubectl describe pvc pvc-model -n kubeflow
 ~~~
 
