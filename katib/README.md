@@ -40,7 +40,7 @@ metric이 잘 도출되는 것까지 확인하면, experiment를 만들어 hyper
 
 최적화하고자 하는 hyperparameter에 따라, 최적화하는 방식에 따라 katib experiment yaml file을 작성합니다.
 
-`objective`
+`-objective`
 
 ```
 $  objective:
@@ -58,7 +58,7 @@ metric을 수집하는 metric collector은 StdOut collector을 사용합니다.
 
 **(tensorflow summary collector 같은 경우에는, 현재 버전 기준으로 Tensorflow 1에 대해서만 지원합니다. 본 코드는 Tensorflow2로 작성되었기 때문에 사용하지 않았습니다.)**
 
-`algorithm`
+`-algorithm`
 
 ```
 $  algorithm:
@@ -68,7 +68,7 @@ optimization algorithm을 정의합니다.
 
 algorithm의 종류로는 random, gridsearch, **bayesian optimization** 등을 지원합니다.
 
-`parameters`
+`-parameters`
 
 ```
 $  parameters:
@@ -91,7 +91,7 @@ $        max: "40"
 
 learning rate은 0.001 ~ 0.003 사이의 값 중에서 임의의 실수값을, batch size는 16 ~ 40 사이의 값 중에서 임의의 정수값을 선택하여 최적화했습니다.
 
-`trial template`
+`-trial template`
 
 experiment는 suggestion을 통해서 test하고자 하는 parameter 값을 결정합니다.
 
@@ -115,7 +115,7 @@ graph에서는 suggestion에서 결정한 parameter values와 그에 대한 metr
 
 최고의 성능을 보여준 hyperparameter을 결정할 수 있습니다.
 
-각 trial에 대한 결과는 katib-table을 통해서도 확인할 수 있습니다.
+각 trial에 대한 결과는 table을 통해서도 확인할 수 있습니다.
 
 ![katib-table](https://github.com/rauleun/Kubeflow/blob/master/katib/README-images/katib-table.GIF)
 
