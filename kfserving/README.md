@@ -63,20 +63,53 @@ model 위치가 잘 입력되었다면 inference service를 생성해줍니다.
 
 `control-plane = kubeflow`
 
+만약 control-plane label이 제거되지 않은 상태라면, storage initializer가 정상적으로 생성되지 않아 inference service가 model path를 파악하지 못하는 문제가 발생합니다. (Filesystem access error)
+
 namespace의 label은 아래의 명령어로 확인할 수 있습니다.
 
 ~~~
 $ kubectl describe namespace kubeflow
 ~~~
 
-생성된 inference service에 traffic이 잘 전송되고 있다면, URL이 생성되고 READY 란에 `TRUE`가 표기됩니다.
+inference service를 생성한 후 traffic이 잘 전송되고 있다면, URL이 생성되고 READY 란에 `TRUE`가 표기됩니다.
 
 ~~~
 $ kubectl apply -f infservice-espcn -n kubeflow
 $ kubectl get inferenceservice -A
 ~~~
 
+---
 
+### request inference
+
+kfserving inference service는 json 형태의 데이터만을 처리할 수 있습니다.
+
+따라서 inference 하고자 하는 image file (png)를 json으로 변환해주어야 합니다.
+
+```
+$ python data-input.py
+```
+
+`input path`, `ingress gateway`, `cluster IP`, `service hostname` 등을 지정해주고 inference service에 request를 전송합니다.
+
+```
+MODEL_NAME=model-espcn
+INPUT_PATH=@data-espcn/0100.json
+INGRESS_GATEWAY=istio-ingressgateway
+CLUSTER_IP=10.96.184.156
+SERVICE_HOSTNAME=$(kubectl get inferenceservice -n kubeflow ${MODEL_NAME} -o jsonpath='{.status.default.predictor.host}')
+curl -v -H "Host: ${SERVICE_HOSTNAME}" http://$CLUSTER_IP/v1/models/$MODEL_NAME:predict -d $INPUT_PATH > ./output.json
+```
+
+inference service의 output은 json file로 저장합니다.
+
+x-envoy-upstream-service-time에 추론에 소요된 시간이 표시됩니다.
+
+json 형태로 저장된 output을 image file (png)로 다시 변환합니다.
+
+```
+python data-output.py
+```
 
 
 
