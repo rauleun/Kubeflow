@@ -80,7 +80,7 @@ $ kubectl get inferenceservice -A
 
 ---
 
-### request inference
+### 3. request inference
 
 kfserving inference service는 json 형태의 데이터만을 처리할 수 있습니다.
 
