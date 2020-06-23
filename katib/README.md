@@ -52,7 +52,7 @@ $      kind: StdOut
 
 metric을 수집하는 metric collector은 StdOut collector을 사용합니다.
 
-(tensorflow summary collector 같은 경우에는, 현재 버전 기준으로 Tensorflow 1에 대해서만 지원합니다. 본 코드는 Tensorflow2로 작성되었기 때문에 사용하지 않았습니다.)
+**(tensorflow summary collector 같은 경우에는, 현재 버전 기준으로 Tensorflow 1에 대해서만 지원합니다. 본 코드는 Tensorflow2로 작성되었기 때문에 사용하지 않았습니다.)**
 
 `algorithm`
 
@@ -62,7 +62,7 @@ $    algorithmName: bayesianoptimization
 ```
 optimization algorithm을 정의합니다. 
 
-algorithm의 종류로는 random, gridsearch, bayesian optimization 등을 지원합니다.
+algorithm의 종류로는 random, gridsearch, **bayesian optimization** 등을 지원합니다.
 
 `parameters`
 
