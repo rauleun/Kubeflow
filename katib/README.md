@@ -62,9 +62,13 @@ learning rate은 0.001 ~ 0.003 사이의 값 중에서 임의의 실수값을, b
 
 experiment는 suggestion을 통해서 test하고자 하는 parameter 값을 결정합니다.
 
-parameter 값이 결정되고 나면 trial을 생성하여 결정된 parameter에 대한 validation metric 결과값을 추출합니다.
+parameter 값이 결정되고 나면 job이 trial을 병렬적으로 생성하여 결정된 parameter에 대한 validation metric 결과값을 추출합니다.
 
 validation metric 결과값이 목표치에 도달하거나, 사전에 정의한 max trial count의 개수만큼 trial을 진행한다면 experiment가 종료됩니다.
+
+trial template에는 trial에 따라 model을 training해주는 container을 정의해주고 각 trial마다 자원을 할당해줄 수 있습니다.
+
+또한 command 란에 저장 경로 등의 argument를 추가하여 training을 진행할 수 있습니다.
 
 ### 3. graph 
 
