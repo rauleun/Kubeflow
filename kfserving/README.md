@@ -35,7 +35,7 @@ pod 생성이 완료되면, local에 저장되어 있는 model을 pod 내에 pvc
 $ kubectl cp espcn/ pod-espcn:/hd/models -n kubeflow 
 ~~~
 
-pod 내부로 들어가서 model이 잘 옮겨졌는지 확인하고, tf serving version 형식에 맞게 model이 담긴 폴더를 변경해줍니다.
+pod 내부로 들어가서 model이 잘 옮겨졌는지 확인하고, tf serving의 version 형식에 맞게 model이 담긴 폴더를 변경해줍니다.
 
 (*path/version_number/saved_model.pb* 형태로 저장되어야 합니다.)
 
@@ -55,13 +55,13 @@ model 위치가 잘 입력되었다면 inference service를 생성해줍니다.
 
 이 때, inference service가 생성되는 namespace의 label에는 
 
-`**serving.kubeflow.org = true**`
+`serving.kubeflow.org = true`
 
-`**serving.kubeflow.org/inferenceservice = enabled**`
+`serving.kubeflow.org/inferenceservice = enabled`
  
 등이 필수적으로 포함되어야 하며, 아래와 같은 control plane label은 반드시 제거된 상태여야만 합니다.
 
-**control-plane = kubeflow**
+`control-plane = kubeflow`
 
 namespace의 label은 아래의 명령어로 확인할 수 있습니다.
 
@@ -69,7 +69,7 @@ namespace의 label은 아래의 명령어로 확인할 수 있습니다.
 $ kubectl describe namespace kubeflow
 ~~~
 
-생성된 inference service에 traffic이 잘 전송되고 있다면, URL이 생성되고 READY 란에 TRUE가 표기됩니다.
+생성된 inference service에 traffic이 잘 전송되고 있다면, URL이 생성되고 READY 란에 `TRUE`가 표기됩니다.
 
 ~~~
 $ kubectl apply -f infservice-espcn -n kubeflow
