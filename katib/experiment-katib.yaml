@@ -1,10 +1,10 @@
 apiVersion: "kubeflow.org/v1alpha3"
 kind: Experiment
 metadata:
-  namespace: ai-dept
+  namespace: kubeflow 
   labels:
     controller-tools.k8s.io: "1.0"
-  name: katib-sr-ex2
+  name: experiment-katib
 spec:
   objective:
     type: maximize
@@ -42,23 +42,23 @@ spec:
             template:
               spec:
                 volumes:
-                - name: sr-data
+                - name: data-espcn
                   persistentVolumeClaim:
-                    claimName: pvc-sr-data
+                    claimName: pvc-katib
                 containers:
                 - name: {{.Trial}}
                   image: rauleun/ai-kubeflow:ver7
                   volumeMounts:
-                  - name: sr-data
+                  - name: data-espcn
                     mountPath: /hd  
                   resources:
                     requests:
-                      cpu: 0.7
-                      memory: 10Gi
+                      cpu: 0.5
+                      memory: 3Gi
                       nvidia.com/gpu: 1
                     limits:
-                      cpu: 0.8
-                      memory: 20Gi
+                      cpu: 0.7
+                      memory: 5Gi
                       nvidia.com/gpu: 1
                   command:
                   - "python"
