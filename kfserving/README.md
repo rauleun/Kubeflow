@@ -6,8 +6,8 @@ Subpixel convolution layer을 통한 image super-resolution을 수행하는 mode
 
 model을 담기 위해서 persistent volume claim을 생성해줍니다.
 
-'''python 
-kubectl apply -f pvc-espcn.yaml
-'''
+~~~
+$ kubectl apply -f pvc-espcn.yaml
+~~~
 
 
