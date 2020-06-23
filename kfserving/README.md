@@ -4,7 +4,9 @@ kubeflow 기능 중 inference service 생성을 도와주는 KF serving 기능�
 
 Subpixel convolution layer을 통한 image super-resolution을 수행하는 model 중의 하나인 **ESPCN model**을 pre-trained 해두었습니다.
 
-### model upload
+---
+
+### 1. model upload
 
 model을 담기 위한 persistent volume claim을 생성하고, describe 기능을 통해 pvc 생성 정보를 확인해줍니다..
 
@@ -36,7 +38,9 @@ pod 내부로 들어가서 model이 잘 옮겨졌는지 확인하고, tf serving
 $ kubectl exec -it pod-espcn -c container-espcn -n kubeflow /bin/bash
 ~~~
 
-### create inference service
+---
+
+### 2. create inference service
 
 model upload가 완료되면, model의 저장 위치를 infservice-espcn.yaml의 storage URI에 입력합니다.
 
@@ -59,4 +63,12 @@ namespace의 label은 아래의 명령어로 확인할 수 있습니다.
 ~~~
 $ kubectl describe namespace kubeflow
 ~~~
+
+생성된 inference service에 traffic이 잘 전송되고 있다면, URL이 생성되고 READY 란에 TRUE가 표기됩니다.
+
+~~~
+$ kubectl get inferenceservice -A
+~~~
+
+
 
